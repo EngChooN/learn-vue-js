@@ -1,0 +1,25 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app"></div>
+
+<script>
+    const data = {
+        message: 10,
+    };
+
+    function render(something) {
+        const div = document.querySelector("#app");
+        div.innerHTML = something;
+    }
+
+    const app = new Proxy(data, {
+        get() {
+            console.log("값 접근");
+        },
+        set(target, property, newValue) {
+            console.log("값 갱신");
+            render(newValue);
+            target[property] = newValue;
+        },
+    });
+</script>

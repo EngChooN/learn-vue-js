@@ -1,0 +1,24 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <!-- <app-header v-bind:props 속성의 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+    <app-header v-bind:title="appTitle"></app-header>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // props로 보낼 데이터
+                appTitle: "props로 넘기기",
+            };
+        },
+        components: {
+            "app-header": {
+                template: "<h1>{{title}}</h1>",
+                // props 속성 이름을 명시
+                props: ["title"],
+            },
+        },
+    }).mount("#app");
+</script>

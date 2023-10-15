@@ -1,0 +1,40 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <app-header v-bind:app-title="message"></app-header>
+    <app-contents v-on:login="receive"></app-contents>
+</div>
+
+<script>
+    const appHeader = {
+        props: ["appTitle"],
+        template: "<h1>{{ appTitle }}</h1>",
+    };
+
+    const appContents = {
+        template: `<button v-on:click="senEvent">로그인</button>`,
+        methods: {
+            senEvent() {
+                this.$emit("login");
+            },
+        },
+    };
+
+    Vue.createApp({
+        data() {
+            return {
+                message: "",
+            };
+        },
+        methods: {
+            receive() {
+                console.log("받았다");
+                this.message = "로그인 됨";
+            },
+        },
+        components: {
+            "app-header": appHeader,
+            "app-contents": appContents,
+        },
+    }).mount("#app");
+</script>
